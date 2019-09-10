@@ -1,27 +1,26 @@
-let x1 = 28;
-let v1 = 8;
-let x2 = 96;
+let x1 = 0;
+let v1 = 3;
+let x2 = 4;
 let v2 = 2;
 function kangaroo(x1, v1, x2, v2) {
-    let answer;
+    let answer = "NO";
     let left = x1+v1;
     let right = x2+v2;
-    if((x1+v1) === (x2+v2)){
-        answer = "YES"
-    } else if (v2 > v1) {
-        answer = "NO"
-    } else {
-        let max = Math.max(left, right);
-        let min = Math.min(left, right);
-        let result = max % min;
-
-        if (result % 2 === 0) {
-            answer = "YES"
+    let counter = 0;
+    while (left < right && counter < 10000) {
+        if (left === right) {
+            return "YES";
+        } else if (left < right && v2 > v1) {
+            return "NO"
         } else {
-            answer = "NO"
+            left+=v1;
+            right+=v2;
+            counter++;
+            
         }
     }
-    return answer;
+
+    return left === right ? "YES" : "NO"
 }
 
 console.log(kangaroo(x1,v1,x2,v2))
