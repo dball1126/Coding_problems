@@ -1,25 +1,43 @@
 let a = [2, 6];
 let b = [ 24, 36];
 
-function getTotalX(a, b) {
+function betweeen(a, b) {
     // Write your code here
-    let count = 0;
-    let maxA = Math.max(...a);
-    let maxB = Math.min(...b);
-    
-    for (let i = 1; i < 100; i++) {
-        let truthy = true;
-        for (let j = 0; j < a.length && j < b.length; j++) {
-            if (a[j] === undefined || b[j] === undefined) break;
-            if (i % a[j] !== 0 || b[j] % i !== 0) {
-                truthy = false;
-                break
-            }
-            
-        }
-        if (truthy) count++;
+   let results = 0;
+
+   for (let u = Math.max(...a); u <= Math.min(...b); u++) {
+       
+    if (is_fact(u, a) && isFactor(u, b)){
+        results++;
     }
-    return count;
+       
+   }
+   return results;
 }
 
-console.log(getTotalX(a, b))
+function isFactor(n, arr2){
+    let truthy = true;
+    for (let i = 0; i < arr2.length; i++) {
+        if (arr2[i] % n !== 0) {
+            return false;
+        }
+
+    }
+    return truthy;
+}
+
+function is_fact(n, arr1){
+    let truthy = true;
+    for (let i = 0; i < arr1.length; i++) {
+        if (n % arr1[i] !== 0){
+            return false;
+        } 
+        
+    }
+
+   return truthy;
+    }
+
+console.log(isFactor(9, [9,18]))
+
+console.log(betweeen(a, b))
