@@ -1,25 +1,50 @@
-function robot(grid) {
-    let pos = [0][0];
-    let route = {}
-    for (let i = 0; i < grid[0].length; i++) {
-        for (let j = 0; j < grid.length; j++) {
-           let position = [i][j];
-
-           if(grid[i][j] !== "x"){
-               route[grid[position]] = position
-           }
-            
+var findPaths = function (grid) {
+    var paths = [];
+    let cache = new Set();
+    var endRow = grid.length - 1;
+    var endCol = grid[0].length - 1;
+     var recurse = function (row, col, currPath, cache) {
+        if (cache.has([row, col])) return
+        if (row === endRow && col === endCol ) {
+            paths.push(currPath.concat([[row, col+1]]));
+        } else if (row <= endRow && col <= endCol ) {
+            if (row < endRow && grid[row + 1][col] !== 'x' ) {
+                if(grid[row][col+1] === 'x'){
+                    cache.add([row+1, col])
+                }
+                recurse(row + 1, col, currPath.concat([[row, col]]), cache);
+            }
+            if (col < endCol && grid[row][col + 1] !== 'x' && !cache.has([row+1, col])) {
+                if(grid[row+1][col] === 'x'){
+                    cache.add([row, col+1])
+                }
+                recurse(row, col + 1, currPath.concat([[row, col]]), cache);
+            }
         }
-        
-    }
-    return route
-}
+    };
+    recurse(0, 0, [], cache);
+    return paths;
+};
 
+/* TEST */
 
-let  arr = ["t", "t", "t"]
-    arr2 = ["d", "x", "x"]
-    arr3 = ["c", "c", "c"]
+var grid = [
+    ['0', '0', '0'],
+    ['0', 'x', '0'],
+    ['0', 'x', '0'],
+    ['0', '0', '0'],
+    ['0', 'x', '0'],
+    ['0', 'x', '0'],
+    ['0', 'x', '0'],
+    ['0', 'x', '0'],
+    ['0', 'x', '0'],
+    ['0', 'x', '0'],
+    ['0', 'x', '0'],
+    ['0', 'x', '0'],
+    ['0', 'x', '0'],
+    ['0', 'x', '0'],
+    ['0', 'x', '0'],
+    ['0', 'x', '0'],
+];
 
-const grid = [arr, arr2, arr3];
-
-console.log(robot(grid))
+console.log(findPaths(grid));

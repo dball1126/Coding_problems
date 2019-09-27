@@ -1,20 +1,20 @@
 var longestCommonSubsequence = function (text1, text2) {
-    let result = 0;
-    let max = text1.length > text2.length ? text1 : text2
-    let min = text1.length > text2.length ? text2 : text1
-    console.log(max)
-    
-    let results1 = new Map();
-    
-    for (let i = 0; i < min.length; i++) {
-        
-        
-        for (let j = i; j < max.length; j--) {
-            
+    let temp = [];
+    let max = 0;
+    for (let i = 0; i <= text1.length; i++) {
+        temp.push(new Array(text2.length + 1).fill(0));
+    }
+    for (let i = 1; i < temp.length; i++) {
+        for (let j = 1; j < temp[0].length; j++) {
+            if (text1[i - 1] === text2[j - 1]) {
+                temp[i][j] = temp[i - 1][j - 1] + 1
+            } else {
+                temp[i][j] = Math.max(temp[i - 1][j], temp[i][j - 1]);
+            }
+            max = temp[i][j];
         }
     }
-    
-    return results1.size()
+    return max;
 };
 
-console.log(longestCommonSubsequence("abc", "abcc"))
+console.log(longestCommonSubsequence("abcde", "ace"))
