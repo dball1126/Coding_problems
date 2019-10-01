@@ -7,7 +7,7 @@ var findPaths = function (grid) {
         if (cache.has([row, col])) return
         if (row === endRow && col === endCol ) {
             paths.push(currPath.concat([[row, col+1]]));
-        } else if (row <= endRow && col <= endCol ) {
+        } else if (row <= endRow && col <= endCol && !cache.has([row][col+1])) {
             if (row < endRow && grid[row + 1][col] !== 'x' ) {
                 if(grid[row][col+1] === 'x'){
                     cache.add([row+1, col])
@@ -32,19 +32,19 @@ var grid = [
     ['0', '0', '0'],
     ['0', 'x', '0'],
     ['0', 'x', '0'],
-    ['0', '0', '0'],
-    ['0', 'x', '0'],
-    ['0', 'x', '0'],
-    ['0', 'x', '0'],
-    ['0', 'x', '0'],
-    ['0', 'x', '0'],
-    ['0', 'x', '0'],
-    ['0', 'x', '0'],
-    ['0', 'x', '0'],
-    ['0', 'x', '0'],
-    ['0', 'x', '0'],
-    ['0', 'x', '0'],
-    ['0', 'x', '0'],
+    // ['0', '0', '0'],
+    // ['0', 'x', '0'],
+    // ['0', 'x', '0'],
+    // ['0', 'x', '0'],
+    // ['0', 'x', '0'],
+    // ['0', 'x', '0'],
+    // ['0', 'x', '0'],
+    // ['0', 'x', '0'],
+    // ['0', 'x', '0'],
+    // ['0', 'x', '0'],
+    // ['0', 'x', '0'],
+    // ['0', 'x', '0'],
+    // ['0', 'x', '0'],
 ];
 
 console.log(findPaths(grid));
