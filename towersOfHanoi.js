@@ -7,52 +7,20 @@ var TowersOfHanoi = function (n) {
     }
 };
 
-TowersOfHanoi.prototype.move = function (start, mid, dest, depth) {
-    if (depth === 0) {
-        return;
-    } else if (depth === 1) {
-        dest.push(start.pop());
-        // console.log(start, mid, dest);
+const th = new TowersOfHanoi(5)
 
-    } else {
-        var currDepth = depth;
-        var shortTower;
-        var placePiece;
-        if (depth % 2 === 0) {
-            shortTower = mid;
-            placePiece = dest;
-        } else {
-            shortTower = dest;
-            placePiece = mid;
+function tower(n, sourceRod, auxiliaryRod, destinationRod){
+    
+    while (destinationRod.length !== n) {
+        if (sourceRod.length) {
+            let val = sourceRod.pop();
+            auxiliaryRod.push(val)
+            destinationRod.push(auxiliaryRod.pop())
         }
-        var shortTowerDepth = 0;
-        // console.log(start, mid, dest);
-        shortTower.push(start.pop());
-        shortTowerDepth++;
-        currDepth--;
-        var towerSwap1;
-        var towerSwap2;
-        while (currDepth > 0) {
-            placePiece.push(start.pop());
-            currDepth--;
-            // console.log(start, mid, dest);
-            this.move(shortTower, start, placePiece, shortTowerDepth);
-            shortTowerDepth++;
-            towerSwap1 = shortTower;
-            towerSwap2 = placePiece;
-            shortTower = towerSwap2;
-            placePiece = towerSwap1;
-        }
+
     }
-};
 
-/* TEST */
-var th = new TowersOfHanoi(5);
-console.log(th);
-th.move(th.first, th.second, th.third, th.first.length);
-console.log(th);
+    return this;
+}
 
-// var th2 = new TowersOfHanoi(6);
-// console.log(th2);
-// th.move(th2.first, th2.second, th2.third, th2.first.length);
-// console.log(th2);
+console.log(tower(5, th.first, th.third, th.second))
