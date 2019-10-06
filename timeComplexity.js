@@ -20,4 +20,4 @@ function fun(n) {
 
 
 
-console.log(fun(10))
+console.log(funny(64))
