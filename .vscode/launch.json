@@ -1,0 +1,38 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "Coding_problems_91500a7b"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "my-app"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - newJava",
+            "request": "launch",
+            "mainClass": "newJava",
+            "projectName": "Coding_problems_91500a7b"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Local Node File",
+            "console": "integratedTerminal",
+            "program": "${file}"
+        },
+        {
+            "name": "Launch index.html",
+            "type": "chrome",
+            "request": "launch",
+            "file": "${workspaceFolder}/index.html"
+        }
+    ]
+}
