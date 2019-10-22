@@ -1,13 +1,13 @@
 
-A = [1, 3, 6];
-K = 3;
+A = [1];
+K = 0;
 var smallestRangeI = function (A, K) {
+   
     let max = Math.max(...A) - K;
-    let min = Math.min(...A) + -K;
-    console.log(max)
-    console.log(min)
-    if (min > max) return 0;
-    return max - Math.abs(min)
+    let min = Math.min(...A) + K;
+    if (min > max || A.length === 1) return 0;
+    return max - Math.abs(min);
+
 };
 
 
