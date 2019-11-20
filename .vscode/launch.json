@@ -1,38 +1,17 @@
 {
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit:
+    // https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
     "configurations": [
         {
-            "type": "java",
-            "name": "CodeLens (Launch) - App",
-            "request": "launch",
-            "mainClass": "App",
-            "projectName": "Coding_problems_91500a7b"
-        },
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - App",
-            "request": "launch",
-            "mainClass": "App",
-            "projectName": "my-app"
-        },
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - newJava",
-            "request": "launch",
-            "mainClass": "newJava",
-            "projectName": "Coding_problems_91500a7b"
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Local Node File",
-            "console": "integratedTerminal",
-            "program": "${file}"
-        },
-        {
-            "name": "Launch index.html",
-            "type": "chrome",
-            "request": "launch",
-            "file": "${workspaceFolder}/index.html"
+            "name": "Listen for rdebug-ide",
+            "type": "Ruby",
+            "request": "attach",
+            "remoteHost": "127.0.0.1",
+            "remotePort": "1234",
+            "remoteWorkspaceRoot": "${workspaceRoot}"
         }
     ]
 }
