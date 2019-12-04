@@ -1,32 +1,24 @@
 def set_zeroes(matrix)
-    (0...matrix.length).each do |i|
-        (0...matrix.length).each do |j|
-            if matrix[i][j] == 0
-              colHash = [i]
-              rowHash = [j]
-              
-                (0...matrix.length).each do |f|
-                    (0...matrix.length).each do |g|
-                        if matrix[f][g] == 0
-                            colHash.push(f)
-                            rowHash.push(g)
-                        end
-                        
-                        if colHash.include?(f)
-                            matrix[f][g] = 0
-                        end 
-
-                        if rowHash.include?(g)
-                            matrix[f][g] = 0
-                        end
-
-                    end
-                end
-                return matrix
-            end
+   positions = []
+   (0...matrix.length).each do |i|
+        (0...matrix[i].length).each do |j|
+            positions.push([i, j]) if matrix[i][j] == 0
+            
         end
     end
     
+    positions.each do |ele|
+        (0...matrix.length).each do |i|
+            (0...matrix[i].length).each do |j|
+                c = ele.first
+                r = ele.last
+                matrix[i][j] = 0 if c == i
+                matrix[i][j] = 0 if r == j
+                    
+            end
+        end
+    end
+    return matrix
 end
 
 p set_zeroes([
