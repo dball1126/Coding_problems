@@ -1,28 +1,26 @@
 def spiral_order(matrix)
-    order, i, j, c, r = {}, matrix.length * matrix[0].length, 0, 0, 0
 
-    while j < i
-        ele = matrix[c][r]
-        order[[c, r]] = ele
-        if matrix[c][r+1] != nil && !order.has_key?([c,r + 1])
-            r += 1
-        elsif c+1 < matrix.length && !order.has_key?([c + 1,r])
-            
-            c += 1
-        elsif matrix[c][r - 1] != nil && !order.has_key?([c,r - 1])
-            r -= 1
-        elsif c-1 >= 0 && !order.has_key?([c - 1,r])
-            c -= 1
-        end
+    visited, arr, c, r, cc, rr = {}, [], 0, 0, matrix.length, matrix[0].length
+    i = 0
+    while i < (cc * rr)
+             if !visited.has_key?([c, r])
+                arr.push(matrix[c][r])
+                visited[[c, r]] = [c, r]
+             end
 
-        j += 1
+            if c >= 0 && c < cc && r >= 0 && r+1 < rr && !visited.has_key?([c, r+1]) #RIGHT
+                r += 1
+            elsif c >= 0 && c+1 < cc && r >= 0 && r < rr && !visited.has_key?([c+1, r]) #DOWN
+                c += 1
+            elsif c >= 0 && c < cc && r-1 >= 0 && r < rr && !visited.has_key?([c, r-1]) # LEFT
+                r -= 1
+            elsif c-1 >= 0 && c < cc && r >= 0 && r < rr && !visited.has_key?([c-1, r]) # UP
+                c -= 1
+            end
+        i += 1
     end
-    return order.values
+    return arr
 end
 
 
-p spiral_order([
-    [ 1, 2, 3 ],
-    [ 4, 5, 6 ],
-    [ 7, 8, 9 ]
-   ])
+p spiral_order([[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]])
