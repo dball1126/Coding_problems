@@ -1,19 +1,22 @@
 def rob(nums)
+    return 0 if nums.empty?
     return nums[0] if nums.length == 1
-    return nums.max if nums.length == 2
+    return nums.max if nums.length <= 3
 
-    left = nums[0...nums.length-1]
-    right = nums[1..nums.length]
-    i, maxl, maxr = 2, left[0...2].max, right[0...2].max
+    first = nums.slice(0...nums.length-1)
+    second = nums.slice(1...nums.length)
 
-    while i < nums.length-1
-        left[i] = [left[i], left[i-2] + left[i]].max
-        maxl = [left[i], maxl].max
-        right[i] = [right[i], right[i-2] + right[i]].max
-        maxr = [right[i], maxr].max
-        i += 1
+    first[1] = [first[0], first[1]].max
+    second[1] = [second[0], second[1]].max
+    i = 2
+    while i < first.length
+       
+        first[i] = [(first[i] + first[i-2]), first[i-1]].max
+        second[i] = [second[i] + second[i-2], second[i-1]].max
+
+        i +=1 
     end
-    return [maxl, maxr].max
+    return [first.last, second.last].max
 end
 
-p rob([1,3,1,3,100])
+p rob([8,4,8,5,9,6,5,4,4,10])
