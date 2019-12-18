@@ -7,9 +7,7 @@ class Node
     end
 end
 
-def merge_k_lists(lists)
-   
-end
+
 
 
 list1 = Node.new(1)
@@ -30,7 +28,7 @@ list5.next = list6
 
 list7.next = list8
 
-p merge_k_lists([[list1], [list4], [list7]])
+
 
 class MinHeap
     attr_accessor :array
@@ -102,12 +100,33 @@ class MinHeap
     end
 end
 
-h = MinHeap.new
-h.insert(5)
-h.insert(10)
-h.insert(50)
-h.insert(11)
-h.insert(20)
-h.insert(3)
+def merge_k_lists(lists)
+    i, heap, head, master = 0, MinHeap.new, nil, nil
 
-p h.array
+    # Heapify
+    while i < lists.length
+        curr = lists[i]
+        
+        while curr != nil
+            heap.insert(curr.val)
+            curr = curr.next
+        end
+        i += 1
+    end
+    
+    until heap.array.length == 1
+        if head == nil
+            head = Node.new(heap.deleteMin)
+            master = head
+        else
+            head.next = Node.new(heap.deleteMin)
+            head = head.next
+        end
+    end
+    return master;
+end
+
+val =  merge_k_lists([list1, list4, list7])
+
+
+p val
