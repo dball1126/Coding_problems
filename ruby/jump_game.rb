@@ -1,16 +1,19 @@
 def can_jump(nums)
     return true if nums.length == 1
-    last = nums.length-1
-    start = nums[0]
-    return true if start >= last
+    
+    stack = [nums[0]]
+    fin = nums.length-1
 
-    nums[1..nums.length].each_with_index do |ele, i|
-        if start <= (i + 1)
-            return true if ele >= (last-i+1)
+    nums.each_with_index do |ele, idx|
+        
+        last = nums[ele]
+        nums[idx..last].each_with_index do |ele2, idx2|
+            
         end
+
     end
-    false
+
 end
 
 
-p can_jump([3,2,1,0,4])
+p can_jump([2,3,1,1,4])
