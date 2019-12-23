@@ -13,19 +13,38 @@ class Trie
     end
 
     def insert(word, root = self.root)
-        p root
+        letter = word[0]
+        rest = word[1..word.length]
+        
         return if word.empty?
-         letter = word[0]
-         rest = word[1..word.length]
          
-         if (!(root.children.has_key?(letter)))
-             root.children[letter] = Node.new()
-         end
-         if rest.length == 0
-             root.children[letter].isTerminal = true
-         end
+        root.children[letter] = Node.new() if (!(root.children.has_key?(letter)))
+        root.children[letter].isTerminal = true if rest.length == 0
+              
          self.insert(rest, root.children[letter])
      end
+
+
+     def search(word, root = self.root)
+        letter = word[0]
+        rest = word[1..word.length]
+
+       return false if word.empty? || !(root.children.has_key?(letter))
+       return true if word.length == 1 && root.children[letter].isTerminal
+       
+       return self.search(rest, root.children[letter])
+    end
+
+    def starts_with(prefix, root = self.root)
+        letter = prefix[0]
+        rest = prefix[1..prefix.length]
+
+        return false if prefix.empty?
+        return false if !(root.children.has_key?(letter))
+        return true if prefix.length == 1
+        
+        return self.starts_with(rest, root.children[letter])
+    end
 end
 
 node = Node.new()
@@ -38,5 +57,4 @@ trie.insert('in')
 trie.insert('inn')
 trie.insert('inside')
 trie.insert('instructor')
-p trie
-p node.isTerminal
+p trie.starts_with('')
