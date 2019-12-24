@@ -10,14 +10,13 @@ class MyHashSet
     attr_accessor :set, :multiplier
     def initialize()
         self.set = Array.new();
-        self.multiplier = 100000
+        self.multiplier = 123456
     end
     
     def add(key)
         actual_key = key % self.multiplier
-        return actual_key
         if !self.contains(key)
-            self.set[actual_key] = Node.new(key)
+           return self.set[actual_key] = Node.new(key)
         else
             head = self.set[actual_key]
             while head != nil
@@ -68,11 +67,10 @@ class MyHashSet
     end
 end
     
+    
     # Your MyHashSet object will be instantiated and called as such:
      obj = MyHashSet.new()
-    p obj.add(14)
-    p obj.add(18)
-    
-    p obj.set
-    p obj.contains(2)
+    obj.add(14)
+    obj.add(18)
+    p obj.contains(18)
     # param_3 = obj.contains(key)
