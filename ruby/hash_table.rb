@@ -1,100 +1,81 @@
 class Node
     attr_accessor :key, :value, :next
     def initialize(key, value)
-        self.key = key;
-        self.value = value;
+        self.key = key
+        self.value = value
         self.next = nil;
     end
 end
 
-class MyHashSet
-
-=begin
-    Initialize your data structure here.
-=end
-    attr_accessor :set, :count
+class MyHashMap
+    attr_accessor :table, :multiplier
 
     def initialize()
-        self.set = Array.new(1000, nil)
-        self.count = 0
+        self.table = [];
+        self.multiplier = 123456
     end
-
-
-=begin
-    :type key: Integer
-    :rtype: Void
-=end
-    def add(key)
-        self.set.push(*Array.new(1000, nil)) if (self.count == self.set.length) 
-
-        actualKey = key % self.set.length
-        
-        if self.contains(key)
-            head = self.set[actualKey]
-            
-            while head.next != nil
+    
+    def put(key, value)
+        actual_key = key % self.multiplier
+        if self.table[actual_key] === nil
+            self.table[actual_key] = Node.new(key, value)
+        else
+            head = self.table[actual_key]
+            while head != nil
+                if head.key === key
+                    head.value = value
+                    return
+                end
                 head = head.next
             end
 
-            head.next = Node.new(actualKey, key)
+            newHead = self.table[actual_key]
+            newHead.next = Node.new(key, value)
+        end
+    end
+    
+    def get(key)
+        actual_key = key % self.multiplier
+        node = self.table[actual_key]
+        if node == nil
+            return -1
         else
-
-            self.set[actualKey] = Node.new(actualKey, key)
-            self.count += 1
-
+            while node != nil
+                return node.value if node.key == key
+                node = node.next
+            end
         end
-        return nil
+        return -1
     end
-
-
-=begin
-    :type key: Integer
-    :rtype: Void
-=end
+    
     def remove(key)
-        actualKey = key % self.set.length
-        if self.contains(key)
-            head = self.set[actualKey]
-            # if head.next == nil
-            #     self.set[actualKey] = 00 
-            # else
-            #     head = self.set[actualKey]
-            #     self.set[actualKey] = head.next
-            # end
-            self.set[actualKey] = nil
+        actual_key = key % self.multiplier
+        node = self.table[actual_key]
+        if node == nil
+            return
+        else
+            new_head = nil;
+            while node != nil
+                if node.key != key && new_head == nil
+                    new_head = node
+                elsif node.key != key
+                    new_head.next = node
+                end
+                node = node.next
+            end
 
-            self.count -= 1
+            self.table[actual_key] = new_head
         end
-         return nil       
-    end
-
-
-=begin
-    Returns true if this set contains the specified element
-    :type key: Integer
-    :rtype: Boolean
-=end
-    def contains(key)
-        actualKey = key % self.set.length
-       return false if self.set[actualKey] == nil
-       return true if self.set[actualKey].value == key
-
-       head = self.set[actualKey]
-       node = head
-
-       while node.next != nil
-           node = node.next
-            return true if node.value == key
-       end
-
-       return false
-    end
+    end    
 end
 
 # Your MyHashSet object will be instantiated and called as such:
-obj = MyHashSet.new()
-obj.add(2)
-obj.add(2)
-p obj.contains(2)
+obj = MyHashMap.new()
+obj.put(1,1)
+obj.put(2,2)
+ obj.get(1)
+ obj.get(3)
+obj.put(2, 1)
+obj.get(2)
 obj.remove(2)
-p obj.contains(2)
+p obj.get(2)
