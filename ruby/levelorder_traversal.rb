@@ -8,17 +8,25 @@ class TreeNode
 end
 
 
-def postorder_traversal(root)
+def level_order(root)
   return [] if !root
-  postorder = []
-  stack = [root]
-    while stack.length > 0
-        node = stack.pop
-        postorder.unshift(node.val)
-        stack.push(node.left) if node.left 
-        stack.push(node.right) if node.right 
+  levelorder = []
+  queue = [root]
+  sub = []
+  new_queue = []
+  while !queue.empty?
+    node = queue.shift
+    sub.push(node.val)
+    new_queue.push(node.left) if node.left
+    new_queue.push(node.right) if node.right
+    if queue.empty?
+        queue = new_queue
+        levelorder.push(sub)
+        sub = []
     end
-    return postorder
+  end
+
+    return levelorder
 end
 
 
@@ -33,4 +41,4 @@ node1.right = node3
 node2.left = node4
 node2.right = node5
 
-p postorder_traversal(node1)
+p level_order(node1)
