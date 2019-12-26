@@ -13,20 +13,38 @@ class BloomFilter
         end
     end
 
+    
+    def insert(item)
+        hashed_values = self.get_hashed_values(item)
+        hashed_values.each do |value|
+            self.set_value(value)
+        end
+    end
+
+    def may_contain(item)
+        hashed_values = self.get_hashed_values(item)
+        
+        hashed_values.each do |value|
+           return false if self.get_value(value) == false
+        end
+
+        return true
+    end
+    
+    def get_hashed_values(item)
+        [self.hash1(item), self.hash2(item), self.hash3(item)]
+    end
+
+
+    
+    # Protect methods from outside access
+    protected
     def get_value(index)
         @storage[index]
     end
 
     def set_value(index)
         @storage[index] = true
-    end
-
-    def insert(item)
-        hashed_values = self.get_hashed_values(item)
-    end
-
-    def get_hashed_values(item)
-        [self.hash1(item), self.hash2(item), self.hash3(item)]
     end
 
     def hash1(item)
@@ -64,5 +82,5 @@ class BloomFilter
 end
 
  p obj = BloomFilter.new(100)
-p obj.set_value(0)
-p obj.hash3("str")
+p obj.insert("str")
+p obj.may_contain("stri")
