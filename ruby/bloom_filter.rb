@@ -40,7 +40,7 @@ class BloomFilter
     
 
     def initialize(size = 53000)
-        if size > 53000 # This filter will maxout at 53000 items to guarantee 1% acceptable failure rate.
+        if size > 53000 # This filter will maxout at 53000 bits to guarantee 1% acceptable failure rate for 5000 inserted items.
             @size = 53000
         else
             @size = size

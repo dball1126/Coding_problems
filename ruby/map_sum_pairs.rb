@@ -30,8 +30,37 @@ class MapSum
             self.insert(rest, val, root.children[letter])
         end
     
-        def sum(prefix, root = self.root)
+        def sum(prefix = '', root = self.root)
+            allvalues = 0
+            max = 0
+           if (prefix == '')
+            allvalues += 0 if (root.last)
+
+            root.children.each do |k, v|   
+                
+                child = root.children[k]
+                suffixes = self.sum(prefix, child)
+                values = suffixes + v.value
+                allvalues = [allvalues, values].max
+                
+            end
+        else
+            letter = prefix[0]
+            rest = prefix.slice(1, prefix.length)
+            if (!root.children.has_key?(letter))
+                return 0
+            else
+                root.children.each do |k, v|
+                    child = root.children[k]
+                    vals = self.sum(rest, child)
+                    values = vals + v.value
+                    allvalues = [allvalues, values].max
+                end
+            end
+
+           end
            
+           allvalues
         end
     end
 
@@ -39,6 +68,8 @@ class MapSum
  obj = MapSum.new()
  obj.insert('apple', 3);
  obj.insert('app', 2);
- p obj.sum('')
+ obj.insert('computer', 10);
+ obj.insert('comp', 5)
+ p obj.sum('compu')
 # param_2 = obj.sum(prefix)
     
