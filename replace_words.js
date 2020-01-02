@@ -1,7 +1,7 @@
 class Node {
     constructor(){
         this.children = {};
-        this.isTerminal = false;
+        this.endWord = false;
     }
 }
 
@@ -16,7 +16,7 @@ class Trie{
         let rest = string.slice(1);
 
         if (!(letter in root.children)) root.children[letter] = new Node();
-        if (rest.length === 0) root.children[letter].isTerminal = true;
+        if (rest.length === 0) root.children[letter].endWord = true;
 
         this.insert(rest, root.children[letter])
     }
@@ -27,7 +27,7 @@ class Trie{
         let rest = prefix.slice(1);
         if (!(letter in root.children)) return "";
         string += letter
-        if (root.children[letter].isTerminal) return string;
+        if (root.children[letter].endWord) return string;
 
         return this.prefix(rest, root.children[letter], string);
     }
