@@ -1,18 +1,22 @@
 def can_jump(nums)
-    return true if nums.length == 1
-    
-    stack = [nums[0]]
-    fin = nums.length-1
+    jump = Array.new(nums.length, nil)
+    i = 0
 
-    nums.each_with_index do |ele, idx|
-        
-        last = nums[ele]
-        nums[idx..last].each_with_index do |ele2, idx2|
-            
+    while i < nums.length
+        return false if jump[i] == false
+        j = nums[i]
+        while j > i
+            return true if nums[j] >= nums.length-1
+           
+            if jump[j] == nil && !(nums[j] + j >= nums.length - 1)
+                jump[j] = false
+            end
+
+            j -= 1
         end
-
+        i += 1
     end
-
+    return false
 end
 
 

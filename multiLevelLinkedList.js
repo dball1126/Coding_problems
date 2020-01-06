@@ -8,27 +8,27 @@ class Node {
 }
 
 var flatten = function(head) {
-  let headNode = null;
-  let queue = [head];
-  let tail = null;
-  
-  while (queue.length) {
-    let node = queue.shift();
-    if (headNode === null) {
-        headNode = node;
-    } else {
-        tail.next = node;
-        node.prev = tail;
-    }
-    
-    while (node) {
-        if (node.child) queue.push(node.child)
-        if (!node.next) tail = node;
+  let stack = [ head ];
+  const master = head;
+  let nodeHead = null;
+  let order = [];
+  while (stack.length) {
+      let node = stack.pop();
 
-        node = node.next;
-    }
+      if (!nodeHead) {
+          nodeHead = node;
+      } else {
+          nodeHead.next = node;
+          node.prev = nodeHead;
+          nodeHead = node;
+      }
+
+      if (node.next) stack.push(node.next)
+      if (node.child) stack.push(node.child)
+      node.child = null;
   }
-  return headNode;
+
+  return master;
 };
 
 node1 = new Node(1);
