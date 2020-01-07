@@ -1,14 +1,12 @@
-def max_path_sum(root, sums = [])
-    return root.val if root.left.nil? && root.right.nil?
+def max_path_sum(node, max = 0)
+    return 0 if node.nil?
+    return node.val if node.left.nil? && node.right.nil?
 
-    if root.left && root.right
-        if !root.left.left.nil? || !root.right.right.nil?
-            sums.push(root.val + root.left.val + root.right.val)
-        end
-    end
-    
-    sums.push(max_path_sum(root.right, sums) + root.val + max_path_sum(root.left, sums))
-    return sums.max
+    max = [max, node.val + max_path_sum(node.left) + max_path_sum(node.right)].max
+    max = [max, max_path_sum(node.left)].max
+    max = [max, max_path_sum(node.right)].max
+
+    return max
 end
 
 class TreeNode
