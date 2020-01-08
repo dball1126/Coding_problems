@@ -1,38 +1,24 @@
 def is_same_tree(p, q)
-    return true if !p && !q
-  return false if !p || !q
-    return false if p.nil? || q.nil?
+ 
+   queue = [p, q]
 
-    queue = [p, q]
+    while queue.length > 0
+        t1 = queue.shift
+        t2 = queue.shift
 
-    while !queue.empty?
-        n1 = queue.shift
-        n2 = queue.shift
+        return false if t1.val != t2.val
 
-        return false if n1.val != n2.val
+        return false if !t1.left.nil? && t2.left.nil?
+        return false if t1.left.nil? && !t2.left.nil?
 
-        if (n1.left.nil? && n2.left != nil) || (n1.left != nil && n2.left.nil?) || (n1.right.nil? && n2.right != nil) || (n1.right != nil && n2.right.nil?)
-            return false
-        end
-        
-        if !n1.left.nil? && !n2.left.nil?
-            queue << n1.left
-            queue << n2.left
-        end
+        return false if !t1.right.nil? && t2.right.nil?
+        return false if t1.right.nil? && !t2.right.nil?
 
-        if !n1.right.nil? && !n2.right.nil?
-            queue << n1.right
-            queue << n2.right
-        end
+        queue.push(t1.left, t2.left) if !t1.left.nil?
+        queue.push(t1.right, t2.right) if !t1.right.nil?
     end
-
-    true
+    return true
 end
-
-
-
-
-
 
 class TreeNode
     attr_accessor :val, :left, :right

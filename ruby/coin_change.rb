@@ -1,28 +1,26 @@
-def coin_change(coins, amount, arr = [], visited = [], counter = -1)
+def coin_change(coins, amount, count = 0)
+    return Float::INFINITY if amount < 0
+    return count if amount == 0
+    min = Float::INFINITY
 
-    def help(coins, amount, arr, visited, counter)
-   return [] if visited.include?(arr) || arr.sum > amount
-   return arr if arr.sum == amount
-    coins.each do |i|
-        if !visited.include?(arr)
-            result = coin_change(coins, amount, [*arr, i], visited, counter)
-            if result.count != 0
-                if visited.count == 0
-                    visited.push(result) 
-                elsif result.count < visited.first.count
-                    counter = result.count
-                    visited.pop
-                    visited.push(result)
-                   
-                end
-            end
+
+    for c in coins
+        next if c == 0
+
+        if amount - c >= 0
+            amount -= c
+            count += 1
         end
-    end
+
+        if amount == 0
+            min = [min, count].min
+        end
+
+        min = [coin_change(coins, amount, count), min].min
+
     end
 
-    result = help(coins, amount, arr, visited, counter)
-    p counter
-    return result
+    min == Float::INFINITY ? -1 : min
 end
 
 
