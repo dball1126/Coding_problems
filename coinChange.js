@@ -4,19 +4,21 @@ Write a function to compute the fewest number of coins that you need to make up 
 If that amount of money cannot be made up by any combination of the coins, return -1.
 */
 
-var coinChange = function (coins, amount, counter = 0) {
-    if (amount === 0) return counter;
-    if (amount < 0) return -1;
-    let allAmounts = [];
-    coins.forEach(coin => {
-       counter++
-       if (amoung > coin) continue 
-       amount -= coin
-        
-         allAmounts.push(coinChange(coins, amount, counter))
+const coinChange =  (coins, amount, memo = {}) => {
+  if (amount in memo) return memo[amount];
+    if (amount <= 0) return 0;
+    let results = [];
+
+    for(coin in coins) {
       
-    })
-    return allAmounts
+      if (coin <= amount) {
+        
+        results.push(coinChange(coins, (amount-coin), memo) + 1);
+      }    
+    } 
+    memo[amount] = Math.min(...results);
+    
+    return memo[amount];
 };
 
 console.log(coinChange(coins = [1, 2, 5], amount = 11))

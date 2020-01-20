@@ -6,6 +6,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "CodeLens (Launch) - Types",
+            "request": "launch",
+            "mainClass": "java.Types",
+            "projectName": "Coding_problems_91500a7b"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - HelloWorld",
+            "request": "launch",
+            "mainClass": "java.HelloWorld",
+            "projectName": "Coding_problems_91500a7b"
+        },
+        {
             "type": "ruby-debug",
             "request": "launch",
             "name": "Launch File",

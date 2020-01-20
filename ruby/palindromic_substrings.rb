@@ -1,16 +1,14 @@
 def count_substrings(s)
-    return 1 if s.length == 1
-    count, i, j = 0, 0, s.length-1
-
-    while i < s.length && j >= 0
-        i += 1 
-        j -= 1
-
-        count += 1 if s[i..(s.length)] == s[i...(s.length)].reverse
-        count += 1 if s[0..j] == s[0..j].reverse
+   return 0 if s.empty?
+   return 1 if s.length == 1
+    count = 0
+    (0...s.length).each do |i|
+        (i...s.length).each do |j|
+            sub = s[i..j]
+            count += 1 if sub == sub.reverse
+        end
     end
-    
-    count
+    return count
 end
 
-p count_substrings("a")
+p count_substrings("aaa")

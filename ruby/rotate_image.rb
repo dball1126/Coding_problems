@@ -1,16 +1,16 @@
 def rotate(matrix)
-  (0...matrix[0].length).each do |r|
+
+  
     (0...matrix.length).each do |c|
-        
-        matrix[c][r],  matrix[r][c] = matrix[r][c], matrix[c][r]
-       
-      end
-      
+      (c...matrix[0].length).each do |r|
+          
+          matrix[c][r], matrix[r][c] = matrix[r][c], matrix[c][r]
+  
+        end
+        matrix[c] = matrix[c].reverse
     end
-    # (0...matrix.length).each do |i|
-    #   matrix[i] = matrix[i].reverse
-    # end
-    return matrix
+    
+   return matrix
 end
 
 p rotate([

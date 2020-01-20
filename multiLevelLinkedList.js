@@ -8,10 +8,11 @@ class Node {
 }
 
 var flatten = function(head) {
+    if (!head) return;
   let stack = [ head ];
   const master = head;
   let nodeHead = null;
-  let order = [];
+
   while (stack.length) {
       let node = stack.pop();
 
