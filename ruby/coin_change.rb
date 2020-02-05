@@ -1,4 +1,4 @@
-def coin_change(coins, amount, count = 0)
+def coin_change(coins, amount)
     
 end
 

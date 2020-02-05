@@ -8,7 +8,7 @@ const coinChange =  (coins, amount) => {
   let dp = new Array(amount + 1).fill(amount + 1);
       dp[0] = 0;
 
-      for (let i = 1; i < dp.length; i++) {
+      for (let i = 1; i < amount; i++) {
         for (let c = 0; c < coins.length; c++) {
           let coin = coins[c];
           if (coin <= i) {
@@ -16,7 +16,7 @@ const coinChange =  (coins, amount) => {
           }
         }
       }
-      return dp[amount];
+      return dp[amount] === amount+1 ? -1 : dp[amount]
 };
 
-console.log(coinChange(coins = [1, 2, 5], amount = 11))
+console.log(coinChange(coins = [2], amount = 4))
